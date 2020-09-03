@@ -1,0 +1,11 @@
+.Tabzone {
+    position: absolute;
+    bottom:0;
+    right:0;
+    width:100%;
+    height:35%;
+}
+.Tabzone .Tabzone-tabs {
+    height:14%;
+    width:100%;
+}

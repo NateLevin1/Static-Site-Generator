@@ -1,0 +1,15 @@
+import React from 'react';
+import './TabzoneContent.css';
+
+class TabzoneContent extends React.Component<{}, {}> {
+    render() {
+        return (
+            <div className="TabzoneContent">
+                TabzoneContent
+            </div>
+        )
+    }
+}
+    
+
+export default TabzoneContent;
