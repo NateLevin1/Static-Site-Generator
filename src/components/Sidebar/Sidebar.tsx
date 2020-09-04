@@ -5,10 +5,10 @@ import Example from "./Example/Example";
 import Button from "../Topbar/Button/Button";
 
 
-class Sidebar extends React.Component<{},{componentScript: string, frameSrc: string}> {
+class Sidebar extends React.Component<{onComponentSave: (name: string|undefined, content: string|undefined)=>void},{componentScript: string, frameSrc: string}> {
   textarea: RefObject<HTMLTextAreaElement>;
   name: RefObject<HTMLInputElement>;
-  constructor(props: object) {
+  constructor(props: {onComponentSave: (name: string|undefined, content: string|undefined)=>void}) {
     super(props);
     this.state = {
       componentScript: "<div style=\"color: $color;\">Red Text Here!</div>",
@@ -23,7 +23,7 @@ class Sidebar extends React.Component<{},{componentScript: string, frameSrc: str
     this.setState({frameSrc: val});
   }
   save = ()=>{
-    console.log("Saving\n"+this.name.current?.value+"\n"+this.textarea.current?.value);
+    this.props.onComponentSave(this.name.current?.value, this.textarea.current?.value);
   }
   render() {
     return (

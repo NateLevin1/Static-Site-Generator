@@ -1,4 +1,11 @@
 .TabzoneContent {
     margin-top:0.3em;
     height: 84%;
+    overflow: auto;
+}
+.TabzoneContent textarea {
+    width:98%;
+    resize: none;
+    height:90%;
+    margin-top:0.8em;
 }

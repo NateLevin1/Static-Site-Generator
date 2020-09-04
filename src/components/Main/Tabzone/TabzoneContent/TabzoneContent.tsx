@@ -5,7 +5,7 @@ class TabzoneContent extends React.Component<{}, {}> {
     render() {
         return (
             <div className="TabzoneContent">
-                TabzoneContent
+                {this.props.children}
             </div>
         )
     }

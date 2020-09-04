@@ -1,0 +1,11 @@
+.ComponentDescriber h3 {
+    margin-bottom:0.2em;
+}
+.ComponentDescriber code {
+    background-color: rgba(0,0,0,0.1);
+    padding: 0px 4px;
+    white-space: pre-wrap;
+}
+.ComponentDescriber {
+    margin-left: 0.4em;
+}

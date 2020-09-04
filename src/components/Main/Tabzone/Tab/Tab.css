@@ -10,4 +10,8 @@
     position: relative;
     top:0.25em;
     cursor: pointer;
+    padding-top:0.1em;
+}
+.Tab.selected {
+    color: rgb(0, 38, 255);
 }
