@@ -9,6 +9,7 @@ class Tabzone extends React.Component<{}, {}> {
             <div className="Tabzone">
                 <div className="Tabzone-tabs">
                     <Tab content="Input HTML"/>
+                    <Tab content="Input CSS"/>
                     <Tab content="Output HTML"/>
                     <Tab content="Components"/>
                 </div>
