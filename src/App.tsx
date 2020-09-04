@@ -80,8 +80,29 @@ class App extends React.Component<{}, {components: {[key: string]: string}, cont
   onCompile = ()=>{
     let doc = this.state.inputHTML;
     doc = doc.replace(" <link rel=\"stylesheet\" href=\"input.css\">", "<style>\n"+this.state.inputCSS+"\n</style>");
-    let customs: Array<[string, string, string]> = Array.from(doc.matchAll(/<([A-Z][^ ]+) ([^>/]+)\/?>/g), m => [m[1], m[2], m[0]]);
-    customs.forEach((value)=>{
+    
+    let customWithChildren: Array<[string,string,string,string]> = Array.from(doc.matchAll(/<((?:[A-Z][^ >]+)) *([^>/]*)>([\s\S]*?)(?:<\/\1>)+/g), m => [m[1], m[2], m[3], m[0]]);
+    customWithChildren.forEach((value)=>{
+      // get the corresponding component
+      let com = this.state.components[value[0]];
+      if(!com) {
+        console.error(`There is no component with the name "${value[0]}"`);
+      } else {
+        // com is code which should have all instances of $attr replaced with the attr
+        let updated = com;
+        let attrs: Array<[string, string]> = Array.from(value[1].matchAll(/([^ \n=]+)=("|')((?:(?!\2).)+)(?:[^\n ]*\2)/g), m => [m[1], m[3]]);
+        updated = updated.replace(/\$children/g, value[2]);
+        attrs.forEach((attr: [string, string])=>{
+          updated = updated.replace(new RegExp("\\$"+attr[0], "g"), attr[1]);
+        });
+        // then it should be replaced
+        doc = doc.replace(value[3], updated);
+      }
+    });
+
+
+    let customSelfClosing: Array<[string, string, string]> = Array.from(doc.matchAll(/<([A-Z][^ ]+) ([^>/]*)\/?>/g), m => [m[1], m[2], m[0]]);
+    customSelfClosing.forEach((value)=>{
       // get the corresponding component
       let com = this.state.components[value[0]];
       if(!com) {
@@ -91,7 +112,7 @@ class App extends React.Component<{}, {components: {[key: string]: string}, cont
         let updated = com;
         let attrs: Array<[string, string]> = Array.from(value[1].matchAll(/([^ \n=]+)=("|')((?:(?!\2).)+)(?:[^\n ]*\2)/g), m => [m[1], m[3]]);
         attrs.forEach((attr: [string, string])=>{
-          updated = updated.replace(new RegExp("$"+attr[0], "g"), attr[1]);
+          updated = updated.replace(new RegExp("\\$"+attr[0], "g"), attr[1]);
         });
         // then it should be replaced
         doc = doc.replace(value[2], updated);

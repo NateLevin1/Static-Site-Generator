@@ -8,6 +8,15 @@ class Tabzone extends React.Component<{content: Array<{content: string, type?: s
     tabSelect = (selected: string)=>{
         this.props.onSelect(selected);
     }
+    textareaKeydown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+        let el = e.target as HTMLTextAreaElement;
+        if(e.keyCode===9 || e.which===9){
+            e.preventDefault();
+            var s = el.selectionStart;
+            el.value = el.value.substring(0,el.selectionStart) + "\t" + el.value.substring(el.selectionEnd);
+            el.selectionEnd = s+1; 
+        }
+    }
     render() {
         return (
             <div className="Tabzone">
@@ -27,7 +36,7 @@ class Tabzone extends React.Component<{content: Array<{content: string, type?: s
                             case "p":
                                 return <p key={index}>{val.content}</p>
                             case "textarea":
-                                return <textarea key={index+val.content/**Stupid but works */} onChange={val.textareaChange} defaultValue={val.content}></textarea>
+                                return <textarea key={index+val.content/**Stupid but works */} onChange={val.textareaChange} onKeyDown={this.textareaKeydown} defaultValue={val.content}></textarea>
                             default:
                                 return <ComponentDescriber key={index} name={contentArr[0]} content={contentArr[1]}/>
                         }
