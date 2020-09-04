@@ -22,8 +22,8 @@ class Tabzone extends React.Component<{content: Array<{content: string, type?: s
             <div className="Tabzone">
                 <div className="Tabzone-tabs">
                     <Tab content="Input HTML" selected={this.props.selected === "Input HTML"} onClick={this.tabSelect}/>
-                    <Tab content="Components" selected={this.props.selected === "Components"} onClick={this.tabSelect}/>
                     <Tab content="Input CSS" selected={this.props.selected === "Input CSS"} onClick={this.tabSelect}/>
+                    <Tab content="Components" selected={this.props.selected === "Components"} onClick={this.tabSelect}/>
                     <Tab content="Output HTML" selected={this.props.selected === "Output HTML"} onClick={this.tabSelect}/>
                 </div>
                 <TabzoneContent>

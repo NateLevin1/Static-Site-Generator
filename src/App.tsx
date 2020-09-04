@@ -124,7 +124,7 @@ class App extends React.Component<{}, {components: {[key: string]: string}, cont
     return (
       <div>
       <Topbar onCompile={this.onCompile} />
-      <Sidebar onComponentSave={this.newComp}/>
+      <Sidebar onComponentSave={this.newComp} style={this.state.inputCSS}/>
       <Main content={this.state.content} selected={this.state.selected} onSelect={this.newTabSelected} doc={this.state.srcDoc}/>
     </div>
     )
